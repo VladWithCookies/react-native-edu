@@ -6,7 +6,7 @@ import OwlItemComponent from './component';
 
 class OwlItem extends React.Component {
   handleShowOwl = () => {
-    this.props.showOwl(this.props.name);
+    this.props.showOwl(this.props.title);
   }
 
   render() {

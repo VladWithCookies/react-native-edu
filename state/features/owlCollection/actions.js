@@ -8,3 +8,8 @@ export const showOwl = owlName => ({
 export const closeOwl = () => ({
   type: types.CLOSE_OWL,
 })
+
+export const setOwls = owls => ({
+ type: types.SET_OWLS,
+ owls,
+})

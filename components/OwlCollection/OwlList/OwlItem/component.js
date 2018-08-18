@@ -2,7 +2,7 @@ import React from 'react';
 import { ListItem, Left, Thumbnail, Body, Text } from 'native-base';
 
 const OwlItem = ({
-  name, description, image, handleShowOwl,
+  title, name, image, handleShowOwl,
 }) => (
   <ListItem onPress={handleShowOwl} avatar>
     <Left>
@@ -11,7 +11,7 @@ const OwlItem = ({
     <Body>
       <Text>{name}</Text>
       <Text note numberOfLines={1}>
-        {description}
+        {title}
       </Text>
     </Body>
   </ListItem>

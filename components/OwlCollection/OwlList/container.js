@@ -12,7 +12,7 @@ class OwlList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  owls: state.owlCollection.all,
+  owls: state.owlCollection.catched,
 });
 
 export default connect(mapStateToProps)(OwlList);

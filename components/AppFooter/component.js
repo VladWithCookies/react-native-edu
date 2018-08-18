@@ -10,13 +10,13 @@ const AppFooter = ({
 				onPress={() => setActiveTab('catch')}
 				active={activeTab === 'catch'}
 			>
-				<Text>Catch</Text>
+				<Text>Ловить</Text>
 			</Button>
 			<Button
 				onPress={() => setActiveTab('watch')}
 				active={activeTab === 'watch'}
 			>
-				<Text>Watch</Text>
+				<Text>Смотреть</Text>
 			</Button>
 		</FooterTab>
 	</Footer>
