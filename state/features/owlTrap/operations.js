@@ -10,7 +10,7 @@ const setTrapOperation = createLogic({
   latest: true,
 
   process(deps, dispatch, done) {
-    // TODO add delayed jobs
+    // TODO add delayed job with some catch logic
     dispatch(catchOwl());
     done();
   },
@@ -20,15 +20,12 @@ const catchOwlOperation = createLogic({
   type: types.CATCH_OWL,
   latest: true,
 
-  async process({ getState, AsyncStorage }, dispatch, done) {
+  async process({ getState }, dispatch, done) {
     const state = getState();
     const allOwls = state.owlCollection.all;
+    const catchedOwls = state.owlCollection.catched || []; 
     const catchedOwl = allOwls[Math.floor(Math.random() * allOwls.length)];
-
-    const myOwls = await AsyncStorage.getItem('myOwls').then(res => JSON.parse(res)) || [];
-    const newData = uniqBy([...myOwls, catchedOwl], owl => owl.title);
-
-    await AsyncStorage.setItem('myOwls', JSON.stringify(newData));
+    const newData = uniqBy([...catchedOwls, catchedOwl], owl => owl.title);
 
     dispatch(setOwls(newData));
     done();

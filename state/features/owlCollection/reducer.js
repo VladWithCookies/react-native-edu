@@ -1,9 +1,9 @@
 import * as types from './types';
+import allOwls from '../../../data/owls';
 
 const initialState = {
-  catched: [],
-  openedOwl: null,
-};
+	all: allOwls,
+}
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {

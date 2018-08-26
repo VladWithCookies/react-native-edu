@@ -6,28 +6,24 @@ import { Font, AppLoading } from 'expo';
 import { Root } from 'native-base';
 import { createLogicMiddleware } from 'redux-logic';
 import { AsyncStorage } from 'react-native';
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import storage from 'redux-persist/lib/storage'
 
-import allOwls from './data/owls';
 import reducers from './state/reducers';
 import operations from './state/operations';
 import AppLayout from './components/AppLayout/container';
 
-const initialState = {
-  owlCollection: {
-    all: allOwls,
-    catched: [],
-  },
+const persistConfig = {
+  key: 'root',
+  storage,
 };
 
-const deps = { AsyncStorage };
-const logic = createLogicMiddleware(operations, deps);
+const logic = createLogicMiddleware(operations, {});
 const middlewares = [logic, logger];
-
-const store = createStore(
-  reducers,
-  initialState,
-  applyMiddleware(...middlewares),
-);
+const persistedReducer = persistReducer(persistConfig, reducers);
+const store = createStore(persistedReducer, {}, applyMiddleware(...middlewares));
+const persistor = persistStore(store);
 
 class App extends React.Component {
   state = {
@@ -45,9 +41,11 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Root>
-          {this.state.loading ? <AppLoading /> : <AppLayout />}
-        </Root>
+        <PersistGate loading={null} persistor={persistor}>
+          <Root>
+            {this.state.loading ? <AppLoading /> : <AppLayout />}
+          </Root>
+        </PersistGate>
       </Provider>
     );
   }

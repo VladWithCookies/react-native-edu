@@ -7,3 +7,8 @@ export const setTrap = () => ({
 export const catchOwl = () => ({
   type: types.CATCH_OWL,
 });
+
+export const selectBaid = baid => ({
+  type: types.SELECT_BAID,
+  baid,
+})

@@ -1,27 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { AsyncStorage } from 'react-native';
-import { setTrap } from '../../state/features/owlTrap/actions';
+import { setTrap, selectBaid } from '../../state/features/owlTrap/actions';
 import OwlTrapComponent from './component';
 
 class OwlTrap extends React.Component {
-  handleSetTrap = () => {
-    this.props.setTrap();
-  };
+  handleSelectBaid = (baid) => () => {
+    this.props.selectBaid(baid);
+  }
 
   render() {
     return (
       <OwlTrapComponent
         {...this.props}
-        handleSetTrap={this.handleSetTrap}
+        handleSelectBaid={this.handleSelectBaid}
       />
     );
   }
 }
 
+const mapStateToProps = state => ({
+  isMouseSelected: state.owlTrap.selectedBaid === 'mouse',
+  isCaterpillarSelected: state.owlTrap.selectedBaid === 'caterpillar',
+  isMeatSelected: state.owlTrap.selectedBaid === 'meat',
+});
+
 const mapDispatchToProps = {
   setTrap,
+  selectBaid,
 };
 
-export default connect(null, mapDispatchToProps)(OwlTrap);
+export default connect(mapStateToProps, mapDispatchToProps)(OwlTrap);

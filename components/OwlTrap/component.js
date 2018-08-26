@@ -2,7 +2,11 @@ import React from 'react';
 import { Container, Content, Header, Body, Title, Left, Right, Button, Text, ListItem, Radio, H3 } from 'native-base';
 
 const OwlTrap = ({
-  handleSetTrap,
+  setTrap,
+  isMeatSelected,
+  isMouseSelected,
+  handleSelectBaid,
+  isCaterpillarSelected,
 }) => (
   <Container>
     <Header>
@@ -16,31 +20,31 @@ const OwlTrap = ({
       <Content padder>
         <H3>Выбери наживку</H3>
       </Content>
-      <ListItem selected={false} >
+      <ListItem onPress={handleSelectBaid('mouse')} selected={isMouseSelected} >
         <Left>
           <Text>Мыша</Text>
         </Left>
         <Right>
-          <Radio selected={false} />
+          <Radio onPress={handleSelectBaid('mouse')} selected={isMouseSelected} />
         </Right>
       </ListItem>
-      <ListItem selected={true}>
+      <ListItem onPress={handleSelectBaid('meat')} selected={isMeatSelected}>
         <Left>
           <Text>Вяленое мясо</Text>
         </Left>
         <Right>
-          <Radio selected={true} />
+          <Radio onPress={handleSelectBaid('meat')} selected={isMeatSelected} />
         </Right>
       </ListItem>
-      <ListItem selected={false}>
+      <ListItem onPress={handleSelectBaid('caterpillar')} selected={isCaterpillarSelected}>
         <Left>
           <Text>Гусеница</Text>
         </Left>
         <Right>
-          <Radio selected={false} />
+          <Radio onPress={handleSelectBaid('caterpillar')} selected={isCaterpillarSelected} />
         </Right>
       </ListItem>
-      <Button onPress={handleSetTrap} block light>
+      <Button onPress={setTrap} block light>
         <Text>Установить ловушку</Text>
       </Button>
     </Content>
